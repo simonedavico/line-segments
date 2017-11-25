@@ -25,4 +25,4 @@ fun Point.computeSlopeWith(point: Point): Double = (point.y - this.y).toDouble()
  *
  * @param point the other point
  */
-fun Point.computeAngleWith(point: Point) = Math.toDegrees(Math.atan(computeSlopeWith(point)))
+fun Point.computeAngleWith(point: Point) = Math.abs(Math.toDegrees(Math.atan(computeSlopeWith(point))))
