@@ -35,6 +35,12 @@ class RestApi: AbstractVerticle() {
             })
         })
 
+        router.get("/lines/:n").produces(json).handler({ ctx ->
+            lineSegments.getLineSegments(ctx.pathParam("n").toInt()).setHandler({
+                ctx.response().end(Json.encodePrettily(it.result()))
+            })
+        })
+
         vertx.createHttpServer().requestHandler(router::accept).listen(port) {
             if (it.succeeded()) println("Server listening at port $port...")
             else println(it.cause())
