@@ -13,13 +13,19 @@ object ApiUtils {
 
     private val API_DIR = "src/main/kotlin/io/github/simonedavico/api"
 
-    fun runVerticle(clazz: Class<out AbstractVerticle>) {
+    /**
+     * Runs a Vert.x verticle. Very simple implementation, makes
+     * assumptions as to where the verticle is located in the project
+     *
+     * @param verticleClass the verticle class
+     */
+    fun runVerticle(verticleClass: Class<out AbstractVerticle>) {
 
         System.setProperty("vertx.cwd", API_DIR)
 
         val vertxRunner: Consumer<Vertx> = Consumer { vertx ->
             try {
-                vertx.deployVerticle(clazz.name)
+                vertx.deployVerticle(verticleClass.name)
             } catch (t: Throwable) {
                 t.printStackTrace()
             }
