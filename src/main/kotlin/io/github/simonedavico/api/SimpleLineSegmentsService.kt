@@ -11,7 +11,7 @@ import io.vertx.core.Future
  */
 class SimpleLineSegmentsService: LineSegmentsService {
 
-    private var space: Space = mutableSetOf()
+    private var space: Space = setOf()
 
     override fun addPoint(point: Point): Future<Space> {
         space = space.plus(point)

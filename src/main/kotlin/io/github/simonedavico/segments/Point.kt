@@ -5,13 +5,7 @@ package io.github.simonedavico.segments
  *
  * A type representing a point in the 2-dimensional Euclidean space
  */
-typealias Point = Pair<Int, Int>
-
-val Point.x
-    get() = first
-
-val Point.y
-    get() = second
+data class Point(val x: Int, val y: Int)
 
 /**
  * Computes the slope between this point and another one
