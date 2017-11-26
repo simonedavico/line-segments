@@ -6,6 +6,8 @@ import io.github.simonedavico.segments.Space
 import io.vertx.core.Future
 
 /**
+ * An interface for an async line segments service
+ *
  * @author Simone D'Avico on 26/11/2017.
  */
 interface LineSegmentsService {

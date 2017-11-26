@@ -2,6 +2,7 @@ package io.github.simonedavico.api
 
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Vertx
+import io.vertx.core.json.JsonObject
 import java.util.function.Consumer
 
 /**
@@ -36,4 +37,20 @@ object ApiUtils {
 
     }
 
+    /**
+     * Takes a json object and a decoder, and applies the decoder to the object
+     *
+     * @param obj the json object to decode
+     * @param decoder a decoder function
+     * @return the decoded object
+     */
+    fun <T> fromJson(obj: JsonObject, decoder: (JsonObject) -> T) = obj.let {
+        decoder(it)
+    }
+
 }
+
+/**
+ * A simple data class for an error message
+ */
+data class ErrorMessage(val message: String)

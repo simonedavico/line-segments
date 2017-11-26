@@ -7,6 +7,9 @@ import io.github.simonedavico.segments.findLineSegments
 import io.vertx.core.Future
 
 /**
+ * An implementation for a simple async line segments service.
+ * Points are stored in a set in memory.
+ *
  * @author Simone D'Avico on 26/11/2017.
  */
 class SimpleLineSegmentsService: LineSegmentsService {
