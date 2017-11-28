@@ -12,7 +12,7 @@ You should also expose a REST API that will allow the caller to:
 * Add a point to the space 
 
     ```
-    POST /point with body { 'x': ..., 'y': ... }
+    POST /point with body { "x": ..., "y": ... }
     ```
 
 * Get all points in the space
@@ -21,10 +21,16 @@ You should also expose a REST API that will allow the caller to:
     GET /space
     ```
 
-* Get all lines passing through N points
+* Get all line segments passing through at least N points. Note that a line segment should be a set of points.
 
     ```
     GET /lines/{n}
+    ```
+
+* Remove all points from the space
+
+    ```
+    DELETE /space
     ```
 
 ## Additional rules
@@ -38,3 +44,12 @@ You should also expose a REST API that will allow the caller to:
 * Properly naming variables and documenting the code can help us understand your solution;
 * Validating all inputs to your program will help your solution pass our test cases;
 * There is no bound on the computational complexity of the solution, but solutions with good computational complexity will earn you bonus points.
+
+## N.B.
+
+If you are using MacOS Sierra add to your `/etc/hosts` file a mapping to the canonical `127.0.0.1` address for your Mac hostname.
+
+```
+127.0.0.1   localhost mbpro.local
+::1         localhost mbpro.local
+```
