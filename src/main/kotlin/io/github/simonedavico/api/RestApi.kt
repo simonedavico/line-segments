@@ -58,6 +58,12 @@ class RestApi: AbstractVerticle() {
             }
         }
 
+        delete("/space").produces(json).handler { ctx ->
+            lineSegments.clearSpace().setHandler {
+                ctx.response().end(Json.encodePrettily(it.result()))
+            }
+        }
+
         route().last().handler { ctx ->
             ctx.response().setStatusCode(404).end(
                     Json.encodePrettily(ErrorMessage("Route not found"))

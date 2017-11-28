@@ -13,7 +13,6 @@ import io.vertx.core.Future
  * @author Simone D'Avico on 26/11/2017.
  */
 class SimpleLineSegmentsService: LineSegmentsService {
-
     private var space: Space = setOf()
 
     override fun addPoint(point: Point): Future<Space> {
@@ -22,6 +21,11 @@ class SimpleLineSegmentsService: LineSegmentsService {
     }
 
     override fun getSpace(): Future<Space> = Future.succeededFuture(space)
+
+    override fun clearSpace(): Future<Space> {
+        space = setOf()
+        return Future.succeededFuture(space)
+    }
 
     override fun getLineSegments(numOfPoints: Int): Future<Set<Line>> {
         return Future.succeededFuture(findLineSegments(space, numOfPoints))

@@ -16,6 +16,8 @@ interface LineSegmentsService {
 
     fun getSpace(): Future<Space>
 
+    fun clearSpace(): Future<Space>
+
     fun getLineSegments(numOfPoints: Int): Future<Set<Line>>
 
 }

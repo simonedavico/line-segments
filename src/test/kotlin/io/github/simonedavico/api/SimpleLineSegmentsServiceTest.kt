@@ -57,7 +57,6 @@ internal class SimpleLineSegmentsServiceTest {
         segmentService.getLineSegments(input).setHandler {
             assertThat(it.result())
                     .isNotNull
-//                    .isNotEmpty
                     .hasSize(expected)
         }
     }

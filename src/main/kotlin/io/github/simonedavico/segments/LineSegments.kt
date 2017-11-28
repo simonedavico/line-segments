@@ -44,20 +44,3 @@ fun findLineSegments(space: Space, minPoints: Int = 4): Set<Line> =
     space
         .flatMap { getAllSegmentsForPoint(it, space, minPoints) }
         .toSet()
-
-
-fun main(args: Array<String>) {
-    val p1 = Point(0, 10)
-    val space = setOf(
-            p1, Point(-10, 0), Point(10, 20), Point(20, 30),
-            Point(0, 1), Point(0, 2), Point(0, 3), Point(0, 4)
-    )
-
-    println()
-    space.forEach {
-        println(it to groupByAngle(it, space))
-    }
-    println()
-
-    println(findLineSegments(space))
-}
