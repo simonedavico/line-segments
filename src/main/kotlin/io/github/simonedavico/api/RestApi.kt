@@ -41,31 +41,46 @@ class RestApi: AbstractVerticle() {
             }
 
             lineSegments.addPoint(point).setHandler({
-                ctx.response().end(Json.encodePrettily(it.result()))
+                ctx
+                        .response()
+                        .putHeader("content-type", json)
+                        .end(Json.encodePrettily(it.result()))
             })
 
         }
 
         get("/lines/:n").produces(json).handler { ctx ->
             lineSegments.getLineSegments(ctx.pathParam("n").toInt()).setHandler {
-                ctx.response().end(Json.encodePrettily(it.result()))
+                ctx
+                        .response()
+                        .putHeader("content-type", json)
+                        .end(Json.encodePrettily(it.result()))
             }
         }
 
         get("/space").produces(json).handler { ctx ->
             lineSegments.getSpace().setHandler {
-                ctx.response().end(Json.encodePrettily(it.result()))
+                ctx
+                        .response()
+                        .putHeader("content-type", json)
+                        .end(Json.encodePrettily(it.result()))
             }
         }
 
         delete("/space").produces(json).handler { ctx ->
             lineSegments.clearSpace().setHandler {
-                ctx.response().end(Json.encodePrettily(it.result()))
+                ctx
+                        .response()
+                        .putHeader("content-type", json)
+                        .end(Json.encodePrettily(it.result()))
             }
         }
 
         route().last().handler { ctx ->
-            ctx.response().setStatusCode(404).end(
+            ctx
+                    .response()
+                    .putHeader("content-type", json)
+                    .setStatusCode(404).end(
                     Json.encodePrettily(ErrorMessage("Route not found"))
             )
         }
