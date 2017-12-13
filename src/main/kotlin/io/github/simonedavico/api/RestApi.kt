@@ -89,7 +89,4 @@ class RestApi: AbstractVerticle() {
 
 }
 
-fun main(args: Array<String>) {
-    ApiUtils.runVerticle(RestApi::class.java)
-}
 
