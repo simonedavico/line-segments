@@ -1,6 +1,6 @@
-package io.github.simonedavico.api
+package io.github.linesegments.api
 
-import io.github.simonedavico.segments.Point
+import io.github.linesegments.segments.Point
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.json.Json
 import io.vertx.ext.web.Router

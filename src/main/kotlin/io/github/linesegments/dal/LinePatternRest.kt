@@ -1,11 +1,11 @@
-package io.github.simonedavico.dal
+package io.github.linesegments.dal
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
-import io.github.simonedavico.dal.rest.kotlin.get
-import io.github.simonedavico.segments.Point
+import io.github.linesegments.dal.rest.kotlin.get
+import io.github.linesegments.segments.Point
 import org.glassfish.jersey.client.JerseyClientBuilder
 import org.glassfish.jersey.jackson.JacksonFeature
 import java.util.concurrent.Future
@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response
  */
 class LinePatternRest {
     companion object {
-        private val REST_SERVICE_URL = "http://localhost:3000"
+        private val REST_SERVICE_URL = "http://localhost:8080"
     }
 
     private val client: Client = JerseyClientBuilder.newClient().register(JacksonFeature::class.java)
@@ -44,6 +44,13 @@ class LinePatternRest {
             this.setPoint(it)
         }
 
+    }
+
+    fun deleteSpace(): Future<Response> {
+        return client.target("$REST_SERVICE_URL/space")
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .async()
+                .delete()
     }
 
     fun getSpace(): Future<String> {

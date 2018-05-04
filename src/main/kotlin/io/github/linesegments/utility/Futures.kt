@@ -1,4 +1,4 @@
-package io.github.simonedavico.utility
+package io.github.linesegments.utility
 
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executor

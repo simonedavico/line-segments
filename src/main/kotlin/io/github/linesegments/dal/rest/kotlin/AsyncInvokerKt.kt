@@ -1,4 +1,4 @@
-package io.github.simonedavico.dal.rest.kotlin
+package io.github.linesegments.dal.rest.kotlin
 
 import java.util.concurrent.Future
 import javax.ws.rs.client.AsyncInvoker

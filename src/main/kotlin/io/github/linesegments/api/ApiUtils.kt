@@ -1,4 +1,4 @@
-package io.github.simonedavico.api
+package io.github.linesegments.api
 
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Vertx

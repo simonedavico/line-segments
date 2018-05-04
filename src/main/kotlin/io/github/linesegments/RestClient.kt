@@ -1,10 +1,10 @@
-package io.github.simonedavico
+package io.github.linesegments
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import io.github.simonedavico.dal.LinePatternRest
-import io.github.simonedavico.utility.Futures
+import io.github.linesegments.dal.LinePatternRest
+import io.github.linesegments.utility.Futures
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
 import kotlin.system.exitProcess
@@ -14,6 +14,10 @@ fun main(args: Array<String>) {
     val restClient = LinePatternRest()
 
     objectMapper.registerModule(KotlinModule()) // Enable Kotlin support
+
+    restClient
+            .deleteSpace()
+            .get()
 
     val futureList = restClient
             .setSpace()
@@ -29,9 +33,11 @@ fun main(args: Array<String>) {
             .apply { println("SPACE: $this") }
 
     restClient
-            .getSegment(1)
+            .getSegment(3)
             .get()
             .apply { println("SEGMENTS: $this") }
+
+    // TODO: add function to check the output
 
     exitProcess(0)
 }

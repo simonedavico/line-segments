@@ -1,8 +1,8 @@
-package io.github.simonedavico.api
+package io.github.linesegments.api
 
-import io.github.simonedavico.segments.Line
-import io.github.simonedavico.segments.Point
-import io.github.simonedavico.segments.Space
+import io.github.linesegments.segments.Line
+import io.github.linesegments.segments.Point
+import io.github.linesegments.segments.Space
 import io.vertx.core.Future
 
 /**
