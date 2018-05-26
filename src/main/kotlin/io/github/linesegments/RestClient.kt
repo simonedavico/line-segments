@@ -10,8 +10,10 @@ import java.util.concurrent.Executors
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
+    println("Endpoint ${args[0]}")
+
     val objectMapper = ObjectMapper(YAMLFactory()) // Enable YAML parsing
-    val restClient = LinePatternRest()
+    val restClient = LinePatternRest(args[0])
 
     objectMapper.registerModule(KotlinModule()) // Enable Kotlin support
 

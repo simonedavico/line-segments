@@ -17,15 +17,11 @@ import javax.ws.rs.core.Response
 /**
  * @author Matteo Codogno on 29/11/2017
  */
-class LinePatternRest {
-    companion object {
-        private val REST_SERVICE_URL = "http://localhost:8080"
-    }
-
+class LinePatternRest(private val endpoint: String) {
     private val client: Client = JerseyClientBuilder.newClient().register(JacksonFeature::class.java)
 
     fun setPoint(point: Point): Future<Response> {
-        return client.target("$REST_SERVICE_URL/point")
+        return client.target("$endpoint/point")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .async()
                 .post(Entity.entity(point, MediaType.APPLICATION_JSON_TYPE))
@@ -41,27 +37,28 @@ class LinePatternRest {
                 .openStream()
 
         return mapper.readValue<Set<Point>>(seedInputStream).map {
+            Thread.sleep(500)
             this.setPoint(it)
         }
 
     }
 
     fun deleteSpace(): Future<Response> {
-        return client.target("$REST_SERVICE_URL/space")
+        return client.target("$endpoint/space")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .async()
                 .delete()
     }
 
     fun getSpace(): Future<String> {
-        return client.target("$REST_SERVICE_URL/space")
+        return client.target("$endpoint/space")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .async()
                 .get<String>()
     }
 
     fun getSegment(numberOfPoints: Int): Future<String> {
-        return client.target("$REST_SERVICE_URL/lines/$numberOfPoints")
+        return client.target("$endpoint/lines/$numberOfPoints")
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .async()
                 .get<String>()
