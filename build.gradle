@@ -2,7 +2,8 @@ group 'io.github.simonedavico'
 version '1.0.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.61'
+    ext.kotlin_version = '1.2.41'
+    ext.vertx_version = '3.5.1'
 
     repositories {
         mavenCentral()
@@ -20,8 +21,8 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile 'io.vertx:vertx-web:3.5.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "io.vertx:vertx-web:$vertx_version"
 
     compile 'org.glassfish.jersey.core:jersey-client:2.5'
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.5'
