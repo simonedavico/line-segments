@@ -1,11 +1,7 @@
 package io.github.linesegments.dal
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.fasterxml.jackson.module.kotlin.readValue
+import io.github.linesegments.bl.segments.Point
 import io.github.linesegments.dal.rest.kotlin.get
-import io.github.linesegments.segments.Point
 import org.glassfish.jersey.client.JerseyClientBuilder
 import org.glassfish.jersey.jackson.JacksonFeature
 import java.util.concurrent.Future
@@ -28,19 +24,9 @@ class LinePatternRest(private val endpoint: String) {
     }
 
     fun setSpace(): List<Future<Response>> {
-        val mapper = ObjectMapper(YAMLFactory()) // Enable YAML parsing
-
-        mapper.registerModule(KotlinModule()) // Enable Kotlin support
-
-        val seedInputStream = LinePatternRest::class.java.classLoader
-                .getResource("points_001.yml")
-                .openStream()
-
-        return mapper.readValue<Set<Point>>(seedInputStream).map {
-            Thread.sleep(500)
+        return getPointsFromYamlFile<Set<Point>>("points_001.yml").map {
             this.setPoint(it)
         }
-
     }
 
     fun deleteSpace(): Future<Response> {

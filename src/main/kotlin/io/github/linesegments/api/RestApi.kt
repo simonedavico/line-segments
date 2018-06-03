@@ -1,6 +1,7 @@
 package io.github.linesegments.api
 
-import io.github.linesegments.segments.Point
+import io.github.linesegments.bl.segments.Point
+import io.github.linesegments.dal.getPointFromJson
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.json.Json
 import io.vertx.ext.web.Router
@@ -36,9 +37,7 @@ class RestApi: AbstractVerticle() {
 
         post("/point").consumes(json).handler { ctx ->
 
-            val point = ApiUtils.fromJson(ctx.bodyAsJson) { json ->
-                Point(json.getInteger("x"), json.getInteger("y"))
-            }
+            val point = ApiUtils.fromJson(ctx.bodyAsJson) { json -> getPointFromJson(json) }
 
             lineSegments.addPoint(point).setHandler({
                 ctx

@@ -1,8 +1,8 @@
 package io.github.linesegments.api
 
-import io.github.linesegments.segments.Line
-import io.github.linesegments.segments.Point
-import io.github.linesegments.segments.Space
+import io.github.linesegments.bl.segments.Line
+import io.github.linesegments.bl.segments.Point
+import io.github.linesegments.bl.segments.Space
 import io.vertx.core.Future
 
 /**

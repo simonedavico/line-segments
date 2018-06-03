@@ -1,4 +1,4 @@
-package io.github.linesegments.segments
+package io.github.linesegments.bl.segments
 
 /**
  * @author Simone D'Avico on 25/11/2017.
