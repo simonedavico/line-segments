@@ -1,8 +1,6 @@
-group 'io.github.simonedavico'
-version '1.0.0-SNAPSHOT'
-
 buildscript {
-    ext.kotlin_version = '1.1.61'
+    ext.kotlin_version = '1.2.41'
+    ext.vertx_version = '3.5.1'
 
     repositories {
         mavenCentral()
@@ -12,6 +10,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.0.0.RC7"
+}
+
 apply plugin: 'idea'
 apply plugin: 'kotlin'
 
@@ -19,9 +21,12 @@ repositories {
     mavenCentral()
 }
 
+group 'io.github.simonedavico'
+version '1.0.0-SNAPSHOT'
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile 'io.vertx:vertx-web:3.5.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "io.vertx:vertx-web:$vertx_version"
 
     compile 'org.glassfish.jersey.core:jersey-client:2.5'
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.5'
@@ -41,4 +46,12 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+detekt {
+    version = "1.0.0.RC7"
+    defaultProfile {
+        input = file("src/main/kotlin")
+        filters = ".*/resources/.*,.*/build/.*"
+    }
 }

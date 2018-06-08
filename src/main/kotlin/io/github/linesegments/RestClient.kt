@@ -1,19 +1,18 @@
 package io.github.linesegments
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.fasterxml.jackson.module.kotlin.KotlinModule
+import io.github.linesegments.bl.compareWithSnapshot
+import io.github.linesegments.bl.segments.Line
 import io.github.linesegments.dal.LinePatternRest
+import io.github.linesegments.dal.getPointsFromJsonString
 import io.github.linesegments.utility.Futures
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val objectMapper = ObjectMapper(YAMLFactory()) // Enable YAML parsing
-    val restClient = LinePatternRest()
+    println("Endpoint ${args[0]}")
 
-    objectMapper.registerModule(KotlinModule()) // Enable Kotlin support
+    val restClient = LinePatternRest(args[0])
 
     restClient
             .deleteSpace()
@@ -35,9 +34,11 @@ fun main(args: Array<String>) {
     restClient
             .getSegment(3)
             .get()
-            .apply { println("SEGMENTS: $this") }
+            .apply {
+                val lines: Set<Line> = getPointsFromJsonString(this)
 
-    // TODO: add function to check the output
+                compareWithSnapshot(3, lines)
+            }
 
     exitProcess(0)
 }
